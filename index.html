@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Tool to calculate vw size based on view port width and font size in pixels.">
+	<meta name="keywords" content="css, units, vw, calculator, view port">
+	<meta name="author" content="Vagner Cavalcante">
+	<title>CSS VW Calculator</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container text-center">
+		<h1>Calculator</h1>
+		<p>This tool can be used to calculate the <a href="http://www.w3schools.com/cssref/css_units.asp" target="_blank">vw css unit</a><br>based on view port width and font size in pixels.</p>
+		<div class="row">
+			<div class="col-xs-12" style="height:50px;"></div>
+			<div class="col-xs-3"></div>
+			<div class="form-group col-xs-3">
+				<label>View Port Width</label>
+				<input class="form-control" type="text" id="view-port-width" value="1920">
+			</div>
+			<div class="form-group col-xs-3">
+				<label>Font Size</label>
+				<input class="form-control" type="text" id="font-size" value="20">
+			</div>
+			<div class="col-xs-3"></div>
+			<div class="col-xs-12" style="height:50px;"></div>
+		</div>
+		<h3 id="result"></h3>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script type="text/javascript">
+		function calculate(viewPort, fontSize) {
+			var unitSize = viewPort / 100;
+			var size = (fontSize / unitSize).toFixed(3);
+
+			if (size.slice(-1) == 0) {
+				size = size.substring(0, 4);
+			}
+
+			$('#result').html(size + 'vw');
+		}
+
+		$(function() {
+			calculate(1920, 20);
+
+			$('input#view-port-width, input#font-size').keyup(function() {
+				calculate($('input#view-port-width').val(), $('input#font-size').val());
+			});
+		});
+	</script>
+</body>
+</html>
